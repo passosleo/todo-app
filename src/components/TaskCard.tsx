@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { ITask } from "../interfaces";
 
 export const TaskCard: React.FC<ITask> = ({
@@ -10,7 +10,7 @@ export const TaskCard: React.FC<ITask> = ({
 }) => {
   return (
     <div>
-      <h1>{name}</h1>
+      <h3>{name}</h3>
       <p>{id}</p>
       <p>{done ? "Done" : "Not Done"}</p>
       <p>{createdAt.toLocaleString()}</p>
