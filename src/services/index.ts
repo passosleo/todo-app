@@ -17,3 +17,16 @@ export const getTasks = async () => {
       });
   });
 }
+
+export const getTaskById = async (id: number) => {
+  return new Promise<ITask[]>((resolve, reject) => {
+    request
+      .get(`tasks/${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
