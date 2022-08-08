@@ -1,5 +1,5 @@
 export interface ITask {
-  id: string;
+  _id: string;
   name: string;
   done: boolean;
   createdAt: Date;

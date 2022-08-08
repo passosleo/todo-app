@@ -1,7 +1,9 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme } from "@chakra-ui/react";
+import { fonts } from "./fonts";
+import { sizes } from "./sizes";
 
-const customTheme = {
-
-}
-
-export const theme = extendTheme(customTheme);
+export const theme = extendTheme({
+  sizes,
+  space: sizes,
+  ...fonts,
+});
