@@ -29,7 +29,7 @@ export const TaskCard: React.FC<ITask> = ({
 }) => {
   return (
     <Box
-      w="45%"
+      w="25%"
       bg="gray.100"
       m={3}
       _dark={{ background: "gray.700" }}

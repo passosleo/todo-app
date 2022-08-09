@@ -1,5 +1,21 @@
 import { AddIcon, InfoOutlineIcon } from "@chakra-ui/icons";
-import { Box, Flex, Spinner, Text, Wrap } from "@chakra-ui/react";
+import {
+  Button,
+  Checkbox,
+  Flex,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Spinner,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { TaskCard } from "../components/TaskCard";
 import { ITask } from "../interfaces";
@@ -8,7 +24,10 @@ import { getTasks } from "../services";
 export const Home: React.FC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
   console.log("loading: ", loading);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     fetchTasks();
@@ -39,7 +58,7 @@ export const Home: React.FC = () => {
             ))}
             <Flex
               direction="column"
-              w="45%"
+              w="25%"
               bg="gray.100"
               m={3}
               _dark={{ background: "gray.700" }}
@@ -48,9 +67,37 @@ export const Home: React.FC = () => {
               alignItems="center"
               justifyContent="center"
               cursor="pointer"
+              onClick={onOpen}
             >
               <AddIcon fontSize="3xl" opacity={0.2} />
             </Flex>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Nova Tarefa</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <VStack alignItems="flex-start" spacing={5}>
+                    <Input placeholder="Nome da Tarefa" />
+                    <Checkbox
+                      colorScheme="blue"
+                      onClick={() => setChecked(!checked)}
+                    >
+                      Tarefa concluída
+                    </Checkbox>
+                  </VStack>
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button colorScheme="red" mr={3} onClick={onClose}>
+                    Cancelar
+                  </Button>
+                  <Button colorScheme="blue" mr={3} onClick={onClose}>
+                    Salvar
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </>
         ) : (
           <Flex
